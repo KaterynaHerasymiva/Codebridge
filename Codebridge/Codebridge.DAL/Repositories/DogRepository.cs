@@ -5,8 +5,12 @@ namespace Codebridge.DAL.Repositories;
 
 public class DogRepository : IDogRepository
 {
-    public Task<IQueryable<Dog>> GetDogsAsync()
+    private readonly DogsContext _dogsContext;
+
+    public DogRepository(DogsContext dogsContext)
     {
-        throw new NotImplementedException();
+        _dogsContext = dogsContext;
     }
+
+    public IQueryable<Dog> GetDogsAsync() => _dogsContext.Dogs!.AsQueryable();
 }

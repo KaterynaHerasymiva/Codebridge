@@ -1,4 +1,4 @@
-using Codebridge.DAL.Repositories;
+using Codebridge.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Codebridge.WebApi.Controllers
@@ -7,17 +7,14 @@ namespace Codebridge.WebApi.Controllers
     [Route("[controller]")]
     public class PingController : ControllerBase
     {
-        private readonly ILogger<PingController> _logger;
+        private readonly IPingService _pingService;
 
-        public PingController(ILogger<PingController> logger, DogsContext dogsContext) // Remove
+        public PingController(IPingService pingService)
         {
-            _logger = logger;
+            _pingService = pingService;
         }
 
-        [HttpGet(Name = "Ping")]
-        public string Get()
-        {
-            return "Dogshouseservice.Version1.0.1"; // Add service
-        }
+        [HttpGet(Name = "ping")]
+        public string Get() => _pingService.GetVersion();
     }
 }

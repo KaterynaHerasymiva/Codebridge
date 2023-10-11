@@ -1,4 +1,6 @@
 
+using Codebridge.BLL.Repositories;
+using Codebridge.BLL.Services;
 using Codebridge.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +21,10 @@ namespace Codebridge.WebApi
 
             builder.Services.AddDbContext<DogsContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("CodebridgeDBConnection")));
+
+            builder.Services.AddTransient<IPingService, PingService>();
+            builder.Services.AddTransient<IDogsService, DogsService>();
+            builder.Services.AddTransient<IDogRepository, DogRepository>();
 
 
             var app = builder.Build();
