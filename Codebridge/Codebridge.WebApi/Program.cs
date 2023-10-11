@@ -2,7 +2,10 @@
 using Codebridge.BLL.Repositories;
 using Codebridge.BLL.Services;
 using Codebridge.DAL.Repositories;
+using Codebridge.WebApi.Mapper;
 using Microsoft.EntityFrameworkCore;
+using Sieve.Services;
+using System.Reflection;
 
 namespace Codebridge.WebApi
 {
@@ -19,12 +22,16 @@ namespace Codebridge.WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(DogsProfile)));
+
             builder.Services.AddDbContext<DogsContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("CodebridgeDBConnection")));
 
             builder.Services.AddTransient<IPingService, PingService>();
             builder.Services.AddTransient<IDogsService, DogsService>();
             builder.Services.AddTransient<IDogRepository, DogRepository>();
+
+            builder.Services.AddScoped<ISieveProcessor, CustomSieveProcessor>();
 
 
             var app = builder.Build();
