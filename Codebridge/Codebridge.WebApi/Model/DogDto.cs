@@ -2,7 +2,7 @@
 
 namespace Codebridge.WebApi.Model;
 
-public class DogDto
+public record DogDto
 {
     public DogDto(string name, string color, double tailLength, double weight)
     {

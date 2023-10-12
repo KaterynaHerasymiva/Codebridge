@@ -17,7 +17,7 @@ public class DogsService : IDogsService
 
     public IEnumerable<Dog> GetAllDogs(SortPaginationModel sortPaginationModel)
     {
-        var dogs = _dogRepository.GetDogsAsync();
+        var dogs = _dogRepository.GetDogs();
         return _sieveProcessor.Apply(sortPaginationModel.ToSieveModel(), dogs).ToArray();
     }
 
