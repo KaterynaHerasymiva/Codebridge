@@ -105,6 +105,29 @@ namespace Codebridge.Tests
             }
         }
 
+        [Test]
+        public void TestOnlyPagination()
+        {
+            // Arrange
+            var sortingByNameInvalid = new SortPaginationModel
+            {
+                PageNumber = 4,
+                PageSize = 1
+            };
+
+            // Act
+            var dogs = _dogsServiece.GetAllDogs(sortingByNameInvalid);
+            var dogFromRepo = _dogsTestRepo.GetDogs().Skip(3).Take(1).ToArray();
+
+            // Assert
+            int i = 0;
+            foreach (var dog in dogs)
+            {
+                var dogFormRepo = dogFromRepo[i++];
+                Assert.That(dogFormRepo, Is.SameAs(dog));
+            }
+        }
+
         // invalid pagesize and pagenumber check exception
     }
 }
