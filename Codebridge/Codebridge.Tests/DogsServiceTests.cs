@@ -79,6 +79,64 @@ namespace Codebridge.Tests
         }
 
         [Test]
+        public void TestSortingByColor()
+        {
+            var sortingByColorDefault = new SortPaginationModel
+            {
+                Attribute = nameof(Dog.Color),
+            };
+
+            var dogs = _dogsServiece.GetAllDogs(sortingByColorDefault);
+            var dogFromRepo = _dogsTestRepo.GetDogs().OrderBy(t => t.Color).ToArray();
+
+            int i = 0;
+            foreach (var dog in dogs)
+            {
+                var dogFormRepo = dogFromRepo[i++];
+                Assert.That(dogFormRepo, Is.SameAs(dog));
+            }
+
+        }
+
+        [Test]
+        public void TestSortingByTailLength()
+        {
+            var sortingByTailLengthDefault = new SortPaginationModel
+            {
+                Attribute = nameof(Dog.TailLength),
+            };
+
+            var dogs = _dogsServiece.GetAllDogs(sortingByTailLengthDefault);
+            var dogFromRepo = _dogsTestRepo.GetDogs().OrderBy(t => t.TailLength).ToArray();
+
+            int i = 0;
+            foreach (var dog in dogs)
+            {
+                var dogFormRepo = dogFromRepo[i++];
+                Assert.That(dogFormRepo, Is.SameAs(dog));
+            }
+        }
+
+        [Test]
+        public void TestSortingByWeight()
+        {
+            var sortingByWeightDefault = new SortPaginationModel
+            {
+                Attribute = nameof(Dog.Weight),
+            };
+
+            var dogs = _dogsServiece.GetAllDogs(sortingByWeightDefault);
+            var dogFromRepo = _dogsTestRepo.GetDogs().OrderBy(t => t.Weight).ToArray();
+
+            int i = 0;
+            foreach (var dog in dogs)
+            {
+                var dogFormRepo = dogFromRepo[i++];
+                Assert.That(dogFormRepo, Is.SameAs(dog));
+            }
+        }
+
+        [Test]
         public void TestSortingByInvalidAttribute()
         {
             // Arrange
@@ -149,6 +207,56 @@ namespace Codebridge.Tests
             }
         }
 
-        // invalid pagesize and pagenumber check exception
+        [Test]
+        public void TestPaginationInvalidPageNumber()
+        {
+            // Arrange
+            var paginationModel = new SortPaginationModel
+            {
+                PageNumber = -4,
+                PageSize = 1
+            };
+
+            var ex = Assert.Throws<ArgumentException>(() => _dogsServiece.GetAllDogs(paginationModel));
+
+            Assert.That(ex.Message, Is.EqualTo(nameof(SortPaginationModel.PageNumber)));
+        }
+
+        [Test]
+        public void TestPaginationInvalidPageSize()
+        {
+            // Arrange
+            var paginationModel = new SortPaginationModel
+            {
+                PageNumber = 2,
+                PageSize = -1
+            };
+
+            var ex = Assert.Throws<ArgumentException>(() => _dogsServiece.GetAllDogs(paginationModel));
+
+            Assert.That(ex.Message, Is.EqualTo(nameof(SortPaginationModel.PageSize)));
+        }
+
+        [Test]
+        public async Task TestAddDog()
+        {
+            var dog = new Dog()
+            {
+                Name = "Kuzma",
+                Color = "brown",
+                TailLength = 17,
+                Weight = 20
+            };
+
+            var addedDog = await _dogsServiece.AddDogAsync(dog);
+            Assert.That(dog, Is.EqualTo(addedDog));
+        }
+
+        [Test]
+        public void TestAddNullDog()
+        {
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await _dogsServiece.AddDogAsync(null));
+
+        }
     }
 }

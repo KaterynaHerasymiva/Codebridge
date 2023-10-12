@@ -23,6 +23,11 @@ public class DogsService : IDogsService
 
     public Task<Dog> AddDogAsync(Dog dog)
     {
+        if (dog == null)
+        {
+            throw new ArgumentNullException(nameof(dog));
+        }
+
         return _dogRepository.AddDogAsync(dog);
     }
 }
