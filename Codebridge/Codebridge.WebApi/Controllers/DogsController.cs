@@ -1,24 +1,24 @@
 using AutoMapper;
+using Codebridge.BLL.Entities;
 using Codebridge.BLL.Services;
 using Codebridge.WebApi.Model;
 using Microsoft.AspNetCore.Mvc;
-using Sieve.Services;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Codebridge.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableRateLimiting("fixed")]
     public class DogsController : ControllerBase
     {
         private readonly IDogsService _dogsService;
-        private readonly ISieveProcessor _sieveProcessor;
         private readonly IMapper _mapper;
         private readonly ILogger<DogsController> _logger;
 
-        public DogsController(ILogger<DogsController> logger, IDogsService dogsService, ISieveProcessor sieveProcessor, IMapper mapper)
+        public DogsController(ILogger<DogsController> logger, IDogsService dogsService, IMapper mapper)
         {
             _dogsService = dogsService;
-            _sieveProcessor = sieveProcessor;
             _mapper = mapper;
             _logger = logger;
         }
@@ -28,8 +28,8 @@ namespace Codebridge.WebApi.Controllers
         {
             try
             {
-                var dogs = _dogsService.GetAllDogs();
-                return _sieveProcessor.Apply(sortPaginationModel.ToSieveModel(), dogs).Select(t => _mapper.Map<DogDto>(t));
+                return _dogsService.GetAllDogs(sortPaginationModel).Select(t => _mapper.Map<DogDto>(t));
+
             }
             catch (Exception ex)
             {

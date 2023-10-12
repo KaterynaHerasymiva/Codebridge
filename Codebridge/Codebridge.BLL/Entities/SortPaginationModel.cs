@@ -1,8 +1,8 @@
-﻿using Codebridge.BLL.Entities;
+﻿using Codebridge.WebApi.Model;
 using Sieve.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Codebridge.WebApi.Model;
+namespace Codebridge.BLL.Entities;
 
 public record SortPaginationModel
 {
@@ -18,7 +18,6 @@ public record SortPaginationModel
 
     public SieveModel ToSieveModel()
     {
-        // TODO move to service
         var sortProperty = typeof(Dog).GetProperties().Select(t => t.Name).FirstOrDefault(t => string.Equals(t, Attribute, StringComparison.OrdinalIgnoreCase));
 
         if (sortProperty != null)

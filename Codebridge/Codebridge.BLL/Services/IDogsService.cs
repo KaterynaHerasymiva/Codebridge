@@ -1,8 +1,9 @@
 ﻿using Codebridge.BLL.Entities;
+using Codebridge.WebApi.Model;
 
 namespace Codebridge.BLL.Services;
 
 public interface IDogsService
 {
-    IQueryable<Dog> GetAllDogs();
+    IEnumerable<Dog> GetAllDogs(SortPaginationModel sortPaginationModel);
 }

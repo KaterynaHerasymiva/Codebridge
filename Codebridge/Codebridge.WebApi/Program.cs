@@ -3,6 +3,7 @@ using Codebridge.BLL.Repositories;
 using Codebridge.BLL.Services;
 using Codebridge.DAL.Repositories;
 using Codebridge.WebApi.Mapper;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Sieve.Services;
 using System.Reflection;
@@ -16,6 +17,17 @@ namespace Codebridge.WebApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddRateLimiter(configureOptions =>
+            {
+                configureOptions.RejectionStatusCode = 429;
+
+                configureOptions.AddFixedWindowLimiter("fixed", options =>
+                {
+                    options.PermitLimit = builder.Configuration.GetValue<int>("RateLimiter:PermitLimit");
+                    options.Window = TimeSpan.FromSeconds(builder.Configuration.GetValue<int>("RateLimiter:IntervalInSeconds"));
+                });
+            });
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -49,6 +61,8 @@ namespace Codebridge.WebApi
 
 
             app.MapControllers();
+
+            app.UseRateLimiter();
 
             app.Run();
         }
