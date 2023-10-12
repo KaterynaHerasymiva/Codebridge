@@ -5,7 +5,7 @@ namespace Codebridge.Tests;
 
 public class DogsTestRepository : IDogRepository
 {
-    private readonly Dog[] Dogs =
+    private readonly List<Dog> Dogs = new()
     {
         new Dog(1, "Neo", "red&amber", 22, 32),
         new Dog(2, "Jessy", "black&white", 7, 14),
