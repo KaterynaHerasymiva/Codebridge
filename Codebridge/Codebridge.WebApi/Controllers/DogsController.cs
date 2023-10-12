@@ -37,5 +37,20 @@ namespace Codebridge.WebApi.Controllers
                 throw;
             }
         }
+
+        [HttpPost(Name = "dogs")]
+        public DogDto Post(Dog dog)
+        {
+            try
+            {
+                Task<Dog> ddd = _dogsService.AddDog(dog);
+                return _mapper.Map<DogDto>(ddd);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Internal server error.");
+                throw;
+            }
+        }
     }
 }

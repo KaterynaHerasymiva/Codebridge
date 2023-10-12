@@ -20,4 +20,10 @@ public class DogsService : IDogsService
         var dogs = _dogRepository.GetDogsAsync();
         return _sieveProcessor.Apply(sortPaginationModel.ToSieveModel(), dogs).ToArray();
     }
+
+    public async Task<Dog> AddDog(Dog dog)
+    {
+      return await _dogRepository.AddDogAsync(dog);
+        
+    }
 }
