@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace Codebridge.BLL.Entities;
 
-namespace Codebridge.BLL.Entities;
-
-public record Dog
+public record Dog : Entity
 {
     public Dog(int id, string name, string color, double tailLength, double weight)
     {
@@ -13,21 +11,16 @@ public record Dog
         this.Weight = weight;
     }
 
-    [Required]
-    [Range(1, int.MaxValue)]
-    public int Id { get; init; }
+    public Dog()
+    {
 
-    [Required]
+    }
+
     public string Name { get; init; }
 
-    [Required]
     public string Color { get; init; }
 
-    [Required]
-    [Range(double.Epsilon, 10000)]
     public double TailLength { get; init; }
 
-    [Required]
-    [Range(double.Epsilon, 10000)]
     public double Weight { get; init; }
 }

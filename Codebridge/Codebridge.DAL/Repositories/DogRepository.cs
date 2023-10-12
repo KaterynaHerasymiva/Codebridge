@@ -1,6 +1,5 @@
 ﻿using Codebridge.BLL.Entities;
 using Codebridge.BLL.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace Codebridge.DAL.Repositories;
 
@@ -14,11 +13,17 @@ public class DogRepository : IDogRepository
     }
 
     public IQueryable<Dog> GetDogs() => _dogsContext.Dogs!.AsQueryable();
+
     public async Task<Dog> AddDogAsync(Dog dog)
     {
-        _dogsContext.Dogs.Add(dog);
-        await _dogsContext.SaveChangesAsync();
+        var createdDog = _dogsContext.Dogs?.Add(dog);
+        var result = await _dogsContext.SaveChangesAsync();
 
-        return dog;
+        if (result == 1 && createdDog?.Entity != null)
+        {
+            return createdDog.Entity;
+        }
+
+        throw new InvalidOperationException("Failed to add data to DB!");
     }
 }

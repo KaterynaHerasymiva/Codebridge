@@ -38,12 +38,12 @@ namespace Codebridge.WebApi.Controllers
         }
 
         [HttpPost(Name = "dogs")]
-        public DogDto Post(Dog dog)
+        public async Task<DogDto> Post(DogDto dogDto)
         {
             try
             {
-                Task<Dog> ddd = _dogsService.AddDog(dog);
-                return _mapper.Map<DogDto>(ddd);
+                var dog = _mapper.Map<Dog>(dogDto);
+                return _mapper.Map<DogDto>(await _dogsService.AddDogAsync(dog));
             }
             catch (Exception ex)
             {

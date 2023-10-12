@@ -58,6 +58,27 @@ namespace Codebridge.Tests
         }
 
         [Test]
+        public void TestSortingByNameDescending()
+        {
+            var sortingByNameDefault = new SortPaginationModel
+            {
+                Attribute = nameof(Dog.Name),
+                Order = SortingOrder.Desc
+            };
+
+            var dogs = _dogsServiece.GetAllDogs(sortingByNameDefault);
+            var dogFromRepo = _dogsTestRepo.GetDogs().OrderByDescending(t => t.Name).ToArray();
+
+            int i = 0;
+            foreach (var dog in dogs)
+            {
+                var dogFormRepo = dogFromRepo[i++];
+                Assert.That(dogFormRepo, Is.SameAs(dog));
+            }
+
+        }
+
+        [Test]
         public void TestSortingByInvalidAttribute()
         {
             // Arrange
@@ -84,7 +105,7 @@ namespace Codebridge.Tests
         public void TestSortingByColorDescWithPagination()
         {
             // Arrange
-            var sortingByNameInvalid = new SortPaginationModel
+            var sortingByColorWithPagination = new SortPaginationModel
             {
                 Attribute = nameof(Dog.Color),
                 Order = SortingOrder.Desc,
@@ -93,7 +114,7 @@ namespace Codebridge.Tests
             };
 
             // Act
-            var dogs = _dogsServiece.GetAllDogs(sortingByNameInvalid);
+            var dogs = _dogsServiece.GetAllDogs(sortingByColorWithPagination);
             var dogFromRepo = _dogsTestRepo.GetDogs().OrderByDescending(t => t.Color).Skip(2).Take(2).ToArray();
 
             // Assert
@@ -109,14 +130,14 @@ namespace Codebridge.Tests
         public void TestOnlyPagination()
         {
             // Arrange
-            var sortingByNameInvalid = new SortPaginationModel
+            var paginationModel = new SortPaginationModel
             {
                 PageNumber = 4,
                 PageSize = 1
             };
 
             // Act
-            var dogs = _dogsServiece.GetAllDogs(sortingByNameInvalid);
+            var dogs = _dogsServiece.GetAllDogs(paginationModel);
             var dogFromRepo = _dogsTestRepo.GetDogs().Skip(3).Take(1).ToArray();
 
             // Assert
