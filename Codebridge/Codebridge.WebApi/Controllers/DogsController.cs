@@ -29,7 +29,6 @@ namespace Codebridge.WebApi.Controllers
             try
             {
                 return _dogsService.GetAllDogs(sortPaginationModel).Select(t => _mapper.Map<DogDto>(t));
-
             }
             catch (Exception ex)
             {

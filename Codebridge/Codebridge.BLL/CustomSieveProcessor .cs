@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using Sieve.Models;
 using Sieve.Services;
 
-namespace Codebridge.WebApi;
+namespace Codebridge.BLL;
 
 public class CustomSieveProcessor : SieveProcessor
 {

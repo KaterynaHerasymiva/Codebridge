@@ -1,5 +1,4 @@
 ﻿using Codebridge.BLL.Entities;
-using Codebridge.WebApi.Model;
 
 namespace Codebridge.BLL.Services;
 

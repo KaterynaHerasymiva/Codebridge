@@ -2,7 +2,7 @@
 
 namespace Codebridge.BLL.Entities;
 
-public class Dog
+public record Dog
 {
     public Dog(int id, string name, string color, double tailLength, double weight)
     {

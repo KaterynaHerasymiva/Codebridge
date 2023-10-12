@@ -4,5 +4,5 @@ namespace Codebridge.BLL.Repositories;
 
 public interface IDogRepository
 {
-    IQueryable<Dog> GetDogsAsync();
+    IQueryable<Dog> GetDogs();
 }

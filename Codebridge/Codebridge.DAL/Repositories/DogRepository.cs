@@ -12,5 +12,5 @@ public class DogRepository : IDogRepository
         _dogsContext = dogsContext;
     }
 
-    public IQueryable<Dog> GetDogsAsync() => _dogsContext.Dogs!.AsQueryable();
+    public IQueryable<Dog> GetDogs() => _dogsContext.Dogs!.AsQueryable();
 }

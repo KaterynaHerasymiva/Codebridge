@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codebridge.DAL", "Codebridge.DAL\Codebridge.DAL.csproj", "{69CD6352-B3B3-4B40-A983-D2E97066CC09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codebridge.DAL", "Codebridge.DAL\Codebridge.DAL.csproj", "{69CD6352-B3B3-4B40-A983-D2E97066CC09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codebridge.BLL", "Codebridge.BLL\Codebridge.BLL.csproj", "{F09AEFAC-5D8B-47B3-B2FD-E30D5C571E13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codebridge.BLL", "Codebridge.BLL\Codebridge.BLL.csproj", "{F09AEFAC-5D8B-47B3-B2FD-E30D5C571E13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codebridge.WebApi", "Codebridge.WebApi\Codebridge.WebApi.csproj", "{0EFA6FD2-C220-46AD-A1B7-89C494711793}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codebridge.WebApi", "Codebridge.WebApi\Codebridge.WebApi.csproj", "{0EFA6FD2-C220-46AD-A1B7-89C494711793}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codebridge.Tests", "Codebridge.Tests\Codebridge.Tests.csproj", "{4055605B-7D66-49F0-87AB-E7B6398FC16D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0EFA6FD2-C220-46AD-A1B7-89C494711793}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EFA6FD2-C220-46AD-A1B7-89C494711793}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EFA6FD2-C220-46AD-A1B7-89C494711793}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4055605B-7D66-49F0-87AB-E7B6398FC16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4055605B-7D66-49F0-87AB-E7B6398FC16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4055605B-7D66-49F0-87AB-E7B6398FC16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4055605B-7D66-49F0-87AB-E7B6398FC16D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

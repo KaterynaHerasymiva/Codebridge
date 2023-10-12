@@ -28,6 +28,16 @@ public record SortPaginationModel
             }
         }
 
+        if (PageNumber < 1)
+        {
+            throw new ArgumentException(nameof(PageNumber));
+        }
+
+        if (PageSize < 1)
+        {
+            throw new ArgumentException(nameof(PageSize));
+        }
+
         return new SieveModel
         {
             Page = PageNumber,
